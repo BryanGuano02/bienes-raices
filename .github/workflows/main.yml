@@ -1,0 +1,36 @@
+name: Deploy to Netlify
+
+on:
+  push:
+    branches:
+      - main
+#  release:
+ #   types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Project with Gulp
+        # Si definiste el task "build" en gulpfile.js, usa el siguiente comando:
+        run: npx gulp build
+        # Si prefieres seguir usando el task por defecto (npx gulp), asegúrate de que no inicie el modo watch.
+        # run: npx gulp
+
+      - name: Deploy to Netlify
+        run: npx netlify deploy --prod --dir=build
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
