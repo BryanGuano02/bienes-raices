@@ -61,7 +61,12 @@ function watchArchivos() {
     watch(paths.imagenes, versionWebp);
 }
 
+function copyHTML() {
+  return src('*.html')   // O 'src/**/*.html' según tu estructura
+    .pipe(dest('build'));
+}
+
 exports.css = css;
 exports.watchArchivos = watchArchivos;
 exports.default = parallel(css, javascript, imagenes, versionWebp, watchArchivos);
-exports.build = parallel(css, javascript, imagenes, versionWebp);
+exports.build = parallel(css, javascript, imagenes, versionWebp, copyHTML);
