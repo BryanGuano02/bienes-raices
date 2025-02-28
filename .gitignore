@@ -1,0 +1,10 @@
+# Archivos compilados de CSS y sourcemaps
+*.css
+*.css.map
+
+# Carpetas de distribución o build
+/dist
+/build
+
+# Directorios de dependencias
+/node_modules
