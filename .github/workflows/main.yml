@@ -29,6 +29,9 @@ jobs:
         # Si prefieres seguir usando el task por defecto (npx gulp), asegúrate de que no inicie el modo watch.
         # run: npx gulp
 
+      - name: Install Netlify CLI globally
+        run: npm install netlify-cli
+
       - name: Deploy to Netlify
         run: npx netlify deploy --prod --dir=build
         env:
