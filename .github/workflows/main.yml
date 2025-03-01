@@ -1,11 +1,11 @@
 name: Deploy to Netlify
 
 on:
-  push:
-    branches:
-      - main
-#  release:
- #   types: [published]
+  #push:
+#    branches:
+#      - main
+  release:
+    types: [published]
 
 jobs:
   deploy:
