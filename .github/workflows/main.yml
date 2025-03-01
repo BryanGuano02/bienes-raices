@@ -31,7 +31,7 @@ jobs:
       - name: Create build directory
         run: mkdir -p build
       - name: List repository contents
-        run: ls -R
+        run: ls
 
     #  - name: Move assets to build directory
      #   run: mv bienes-raices-xx/js bienes-raices-xx/css bienes-raices-xx/img build/
