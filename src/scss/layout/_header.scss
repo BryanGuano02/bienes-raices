@@ -20,6 +20,12 @@
         @include m.tablet {
             min-height: 70rem;
         }
+
+        .contenido-header {
+            @include m.tablet {
+                min-height: 70rem;
+            }
+        }
     }
 }
 
