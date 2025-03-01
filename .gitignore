@@ -4,7 +4,8 @@
 
 # Carpetas de distribución o build
 /dist
-/build
+build/*
+!build/*.html
 
 # Directorios de dependencias
 /node_modules
