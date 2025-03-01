@@ -69,4 +69,4 @@ function copyHTML() {
 exports.css = css;
 exports.watchArchivos = watchArchivos;
 exports.default = parallel(css, javascript, imagenes, versionWebp, watchArchivos);
-exports.build = parallel(css, javascript, imagenes, versionWebp, copyHTML);
+// exports.build = parallel(css, javascript, imagenes, versionWebp, copyHTML);
