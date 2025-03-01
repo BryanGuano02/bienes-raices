@@ -28,12 +28,11 @@ jobs:
         run: npx gulp build
         # Si prefieres seguir usando el task por defecto (npx gulp), asegúrate de que no inicie el modo watch.
         # run: npx gulp
-      - name: Move compiled assets to subfolder
-        run: |
-          mkdir -p build/carpeta
-          mv build/css build/build/css
-          mv build/js build/build/js
-          mv build/img build/build/img
+      - name: Create build directory
+        run: mkdir -p build
+
+      - name: Move assets to build directory
+        run: mv js css img build/
 
       - name: Install Netlify CLI globally
         run: npm install netlify-cli
