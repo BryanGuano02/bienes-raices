@@ -32,8 +32,8 @@ jobs:
         run: mkdir -p build
 
       - name: Move assets to build directory
-        run: mv js css img build/
-
+        run: mv bienes-raices-xx/js bienes-raices-xx/css bienes-raices-xx/img build/
+        
       - name: Install Netlify CLI globally
         run: npm install netlify-cli
 
