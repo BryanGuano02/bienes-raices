@@ -4,7 +4,7 @@
 .barra {
     display: flex;
     flex-direction: column;
-    padding-top: 3rem;
+    padding: 3rem 0 3rem 0;
 
     @include m.tablet {
         flex-direction: row;
