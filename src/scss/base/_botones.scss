@@ -1,10 +1,14 @@
 @use '../base/variables' as v;
 @use '../base/mixins' as m;
 
-.boton-verde{
-     @include m.boton(v.$verde, inline-block);
+.boton-verde {
+    @include m.boton(v.$verde, inline-block);
 }
 
-.boton-amarillo{
-     @include m.boton(v.$amarillo, block);
+.boton-amarillo {
+    @include m.boton(v.$amarillo, block);
+}
+
+.boton-amarillo-block {
+    @include m.boton(v.$amarillo, inline-block);
 }
