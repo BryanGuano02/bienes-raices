@@ -12,25 +12,28 @@
     background-color: color.scale(v.$gris, $lightness: 20%);
     border: 1px solid color.scale(v.$gris, $lightness: -5%);
 
-    .contenido-anuncio{
+    .contenido-anuncio {
         padding: 2rem;
     }
 
-    h3, p {
+    h3,
+    p {
         margin: 0;
     }
 
-    .precio {
-        color: v.$verde;
-        font-weight: v.$bold;
-        font-size: 3rem;
-    }
+}
+
+.precio {
+    color: v.$verde;
+    font-weight: v.$bold;
+    font-size: 3rem;
 }
 
 .iconos-caracteristicas {
     display: flex;
     list-style: none;
     padding: 0;
+    max-width: 40rem;
 
     li {
         flex: 1;
