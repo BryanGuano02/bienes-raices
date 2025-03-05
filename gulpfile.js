@@ -62,7 +62,7 @@ function watchArchivos() {
 }
 
 function copyHTML() {
-  return src('*.html')   // O 'src/**/*.html' según tu estructura
+  return src('*.php')   // O 'src/**/*.php' según tu estructura
     .pipe(dest('build'));
 }
 

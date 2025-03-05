@@ -29,7 +29,7 @@
                             <p>4</p>
                         </li>
                     </ul>
-                    <a href="anuncios.html" class="boton-amarillo-block">
+                    <a href="anuncios.php" class="boton-amarillo-block">
                         Ver Propiedad
                     </a>
                 </div>
@@ -60,7 +60,7 @@
                             <p>4</p>
                         </li>
                     </ul>
-                    <a href="anuncio.html" class="boton-amarillo-block">
+                    <a href="anuncio.php" class="boton-amarillo-block">
                         Ver Propiedad
                     </a>
                 </div>
@@ -91,7 +91,7 @@
                             <p>4</p>
                         </li>
                     </ul>
-                    <a href="anuncio.html" class="boton-amarillo-block">
+                    <a href="anuncio.php" class="boton-amarillo-block">
                         Ver Propiedad
                     </a>
                 </div>
@@ -122,7 +122,7 @@
                             <p>4</p>
                         </li>
                     </ul>
-                    <a href="anuncio.html" class="boton-amarillo-block">
+                    <a href="anuncio.php" class="boton-amarillo-block">
                         Ver Propiedad
                     </a>
                 </div>
@@ -153,7 +153,7 @@
                             <p>4</p>
                         </li>
                     </ul>
-                    <a href="anuncio.html" class="boton-amarillo-block">
+                    <a href="anuncio.php" class="boton-amarillo-block">
                         Ver Propiedad
                     </a>
                 </div>
@@ -184,7 +184,7 @@
                             <p>4</p>
                         </li>
                     </ul>
-                    <a href="anuncio.html" class="boton-amarillo-block">
+                    <a href="anuncio.php" class="boton-amarillo-block">
                         Ver Propiedad
                     </a>
                 </div>
@@ -196,10 +196,10 @@
 <footer class="footer seccion">
     <div class="contenedor contenedor-footer">
         <nav class="navegacion">
-            <a href="nosotros.html">Nosotros</a>
-            <a href="anuncio.html">Anuncios</a>
-            <a href="blog.html">Blog</a>
-            <a href="contacto.html">Contacto</a>
+            <a href="nosotros.php">Nosotros</a>
+            <a href="anuncio.php">Anuncios</a>
+            <a href="blog.php">Blog</a>
+            <a href="contacto.php">Contacto</a>
         </nav>
     </div>
     <p class="copyright">Todos los derechos Reservados 2021 &copy;</p>

@@ -5,7 +5,7 @@
 # Carpetas de distribución o build
 /dist
 build/*
-!build/*.html
+!build/*.php
 !build/*.php
 
 # Directorios de dependencias
