@@ -14,5 +14,7 @@
 @use 'layout/contactar';
 @use 'layout/inferior';
 @use 'layout/testimoniales';
-@use 'layout/nosotros';
 @use 'layout/formularios';
+
+@use 'internas/nosotros';
+@use 'internas/admin';
