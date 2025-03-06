@@ -1,7 +1,18 @@
 <?php
+require 'includes/config/database.php';
 require 'includes/funciones.php';
 
+// BDs
+$db = conectarBD();
+
 incluirTemplate('header');
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $titulo = $_POST['titulo'];
+    $precio = $_POST['precio'];
+
+}
 ?>
 <main class="contenedor seccion">
     <h1>Crear</h1>
