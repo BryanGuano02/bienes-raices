@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run PHP Server",
+            "type": "shell",
+            "command": "php -S localhost:3000",
+            "problemMatcher": [],
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "type": "npm",
+            "script": "dev",
+            "problemMatcher": [],
+            "label": "npm: dev",
+            "detail": "gulp",
+            "presentation": {
+                "reveal": "always"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        }
+    ]
+}
