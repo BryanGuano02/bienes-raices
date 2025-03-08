@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errores)) {
-        $nombreCarpeta = 'imagenes';
+        $nombreCarpeta = 'imagenes/';
 
         $ruta = dirname(__DIR__, 2) . '/' . $nombreCarpeta;
 
@@ -79,16 +79,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mkdir($ruta, 0777, true);
         }
 
-        move_uploaded_file($imagen['tmp_name'], $ruta . '/' . $imagen['name']);
-        // exit();
+        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
-        // $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ('$titulo','$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
+        move_uploaded_file($imagen['tmp_name'], $ruta . $nombreImagen);
 
-        // $resultado = mysqli_query($db, $query);
+        $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ('$titulo','$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
 
-        // if ($resultado) {
-        //     header('Location: /admin');
-        // }
+        $resultado = mysqli_query($db, $query);
+
+        if ($resultado) {
+            header('Location: /admin?mensaje=1');
+        }
     }
 }
 
