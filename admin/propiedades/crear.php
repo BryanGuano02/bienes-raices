@@ -27,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $wc = mysqli_real_escape_string($db, $_POST['wc']);
     $estacionamiento = mysqli_real_escape_string($db, $_POST['estacionamiento']);
     $vendedorId = isset($_POST['vendedorId']) ? mysqli_real_escape_string($db, $_POST['vendedorId']) : null;
+    $imagen = isset($_FILES['imagen']) ? $_FILES['imagen'] : null;
+
 
     if (!$titulo) {
         $errores[] = "Debes añadir un título";
@@ -52,23 +54,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errores[] = "Debes añadir el número de estacionamientos";
     }
 
-    // if (!$vendedorId) {
-    //     $errores[] = "Debes elegir el vendedor";
-    // }
 
-    // echo "<pre>";
-    // var_dump($errores);
-    // echo "</pre>";
+    if (!$vendedorId) {
+        $errores[] = "Debes elegir el vendedor";
+    }
+    if (!$imagen['name'] || $imagen['error']) {
+        $errores[] = 'La imagen es obligatoria';
+    }
 
+    $ancho = 1000;
+    $alto = 100;
+    $medida = $ancho * $alto;
+
+    if ($imagen['size'] > $medida) {
+        $errores[] = 'La imagen es demasiado grande';
+    }
 
     if (empty($errores)) {
-        $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ('$titulo','$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
+        $nombreCarpeta = 'imagenes';
 
-        $resultado = mysqli_query($db, $query);
+        $ruta = dirname(__DIR__, 2) . '/' . $nombreCarpeta;
 
-        if ($resultado) {
-            header('Location: /admin');
+        if (!file_exists($ruta)) {
+            mkdir($ruta, 0777, true);
         }
+
+        move_uploaded_file($imagen['tmp_name'], $ruta . '/' . $imagen['name']);
+        // exit();
+
+        // $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ('$titulo','$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
+
+        // $resultado = mysqli_query($db, $query);
+
+        // if ($resultado) {
+        //     header('Location: /admin');
+        // }
     }
 }
 
@@ -85,7 +105,8 @@ incluirTemplate('header');
 
     <a href="../index.php" class="boton boton-verde">Volver</a>
 
-    <form action="" class="formulario" method="POST" action="/admin/propiedades/crear.php">
+    <form action="" class="formulario" method="POST" action="/admin/propiedades/crear.php"
+        enctype='multipart/form-data'>
         <fieldset>
             <legend>Información General</legend>
             <label for="titulo">Título</label>
@@ -96,7 +117,7 @@ incluirTemplate('header');
                 value='<?php echo $precio; ?>'>
 
             <label for="imagen">Imagen</label>
-            <input type="file" id="imagen" accept="image/jpeg, image/png">
+            <input type="file" name="imagen" id="imagen" accept="image/jpeg, image/png">
 
             <label for="descripcion">Descripción</label>
             <textarea id="descripcion" name="descripcion"><?php echo $descripcion; ?></textarea>
