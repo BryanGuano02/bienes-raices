@@ -14,19 +14,28 @@ require 'includes/funciones.php';
 // BDs
 $db = conectarBD();
 
+// Consulta para los datos de la propiedad
+$consulta = 'SELECT * FROM propiedades WHERE id = ' . $id;
+$resultadoPropiedad = mysqli_query($db, $consulta);
+
+$propiedad = mysqli_fetch_assoc($resultadoPropiedad);
+
+
 $consulta = 'SELECT * FROM vendedores;';
 $resultado = mysqli_query($db, $consulta);
 
+
 $errores = [];
 
-$titulo = '';
-$precio = '';
-$descripcion = '';
-$habitaciones = '';
-$wc = '';
-$estacionamiento = '';
-$vendedorId = '';
+$titulo = $propiedad['titulo'];
+$precio = $propiedad['precio'];
+$descripcion = $propiedad['descripcion'];
+$habitaciones = $propiedad['habitaciones'];
+$wc = $propiedad['wc'];
+$estacionamiento = $propiedad['estacionamiento'];
+$vendedorId = $propiedad['vendedorId'];
 $creado = date('Y/m/d');
+$imagenPropiedad = $propiedad['imagen'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
@@ -128,6 +137,8 @@ incluirTemplate('header');
 
             <label for="imagen">Imagen</label>
             <input type="file" name="imagen" id="imagen" accept="image/jpeg, image/png">
+
+            <img src="../../imagenes/<?php echo $imagenPropiedad; ?>" class="imagen-small" alt="Imagen actual de la propiedad">
 
             <label for="descripcion">Descripción</label>
             <textarea id="descripcion" name="descripcion"><?php echo $descripcion; ?></textarea>
