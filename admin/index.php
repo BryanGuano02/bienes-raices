@@ -46,7 +46,9 @@ incluirTemplate('header');
                     <td><img src="/imagenes/<?php echo $propiedad['imagen']; ?>" alt="imagen" class="imagen-tabla"></td>
                     <td>$<?php echo $propiedad['precio']; ?></td>
                     <td>
-                        <a href="#" class="boton-rojo-block">Eliminar</a>
+                        <form method="POST" class="w-100">
+                            <input type="submit" class="boton-rojo-block" value="Eliminar">
+                        </form>
                         <a href="/admin/propiedades/actualizar.php?id=<?php echo $propiedad['id']; ?>"
                             class="boton-amarillo-block">Actualizar</a>
                     </td>
