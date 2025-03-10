@@ -3,8 +3,8 @@
 $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
 
-if(!$id) {
-    header ('Location: /admin');
+if (!$id) {
+    header('Location: /admin');
 }
 
 
@@ -76,9 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$vendedorId) {
         $errores[] = "Debes elegir el vendedor";
     }
-    if (!$imagen['name'] || $imagen['error']) {
-        $errores[] = 'La imagen es obligatoria';
-    }
 
     $ancho = 1000;
     $alto = 100;
@@ -91,22 +88,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errores)) {
         $nombreCarpeta = 'imagenes/';
 
-        $ruta = dirname(__DIR__, 2) . '/' . $nombreCarpeta;
+        $rutaCarpeta = dirname(__DIR__, 2) . '/' . $nombreCarpeta;
 
-        if (!file_exists($ruta)) {
-            mkdir($ruta, 0777, true);
+        if (!file_exists($rutaCarpeta)) {
+            mkdir($rutaCarpeta, 0777, true);
         }
 
-        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+        $nombreImagen = '';
 
-        move_uploaded_file($imagen['tmp_name'], $ruta . $nombreImagen);
+        if ($imagen['name']) {
+            unlink($nombreCarpeta . $propiedad['imagen']);
+            $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
-        $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ('$titulo','$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
+            move_uploaded_file($imagen['tmp_name'], $ruta . $nombreImagen);
+        } else {
+            $nombreImagen = $propiedad['imagen'];
+        }
+
+
+        $query = "UPDATE propiedades SET titulo = '" . $titulo . "', precio = " . $precio . ", imagen = '" . $nombreImagen . "', descripcion = '" . $descripcion . "', habitaciones = " . $habitaciones . ", wc = " . $wc . ", estacionamiento = " . $estacionamiento . ", vendedorId = " . $vendedorId . " WHERE id = " . $id;
 
         $resultado = mysqli_query($db, $query);
 
         if ($resultado) {
-            header('Location: /admin?resultado=1');
+            header('Location: /admin?resultado=2');
         }
     }
 }
@@ -124,8 +129,7 @@ incluirTemplate('header');
 
     <a href="../index.php" class="boton boton-verde">Volver</a>
 
-    <form action="" class="formulario" method="POST" action="/admin/propiedades/crear.php"
-        enctype='multipart/form-data'>
+    <form action="" class="formulario" method="POST" enctype='multipart/form-data'>
         <fieldset>
             <legend>Información General</legend>
             <label for="titulo">Título</label>
@@ -138,7 +142,8 @@ incluirTemplate('header');
             <label for="imagen">Imagen</label>
             <input type="file" name="imagen" id="imagen" accept="image/jpeg, image/png">
 
-            <img src="../../imagenes/<?php echo $imagenPropiedad; ?>" class="imagen-small" alt="Imagen actual de la propiedad">
+            <img src="../../imagenes/<?php echo $imagenPropiedad; ?>" class="imagen-small"
+                alt="Imagen actual de la propiedad">
 
             <label for="descripcion">Descripción</label>
             <textarea id="descripcion" name="descripcion"><?php echo $descripcion; ?></textarea>
