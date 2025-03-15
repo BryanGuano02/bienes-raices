@@ -1,11 +1,11 @@
 <?php
 
-function conectarBD(): mysqli
+function conectarbd(): mysqli
 {
     $db = mysqli_connect('localhost', 'root', 'root', 'bienesracies_crud');
 
     if (!$db) {
-        echo 'Error no se pudo conectar';
+        echo 'error no se pudo conectar';
         exit;
     }
 
