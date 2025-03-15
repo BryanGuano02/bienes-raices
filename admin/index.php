@@ -1,13 +1,8 @@
 <?php
-session_start();
+require 'includes/funciones.php';
+$auth = estaAutenticado();
 
-echo '<pre>';
-var_dump($_SESSION);
-echo '<pre>';
-
-$auth = $_SESSION['login'];
-
-if(!$auth) {
+if (!$auth) {
     header('Location: /');
 }
 
@@ -40,14 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $queryEliminacion = "DELETE FROM propiedades WHERE id = " . $id;
         $resultadoEliminacion = mysqli_query($db, $queryEliminacion);
 
-        if($resultadoEliminacion){
+        if ($resultadoEliminacion) {
             header('location: /admin?resultado=3');
         }
     }
 }
 
-// Importar funciones
-require 'includes/funciones.php';
 incluirTemplate('header');
 ?>
 <main class="contenedor seccion">

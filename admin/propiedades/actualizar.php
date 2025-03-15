@@ -1,9 +1,8 @@
 <?php
-session_start();
+require 'includes/funciones.php';
+$auth = estaAutenticado();
 
-$auth = $_SESSION['login'];
-
-if(!$auth) {
+if (!$auth) {
     header('Location: /');
 }
 
@@ -16,7 +15,6 @@ if (!$id) {
 
 
 require 'includes/config/database.php';
-require 'includes/funciones.php';
 
 // BDs
 $db = conectarBD();
