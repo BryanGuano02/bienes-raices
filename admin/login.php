@@ -6,14 +6,7 @@ $errores = [];
 $email = '';
 $password = '';
 
-
-
-// require '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // echo '<pre>';
-    // var_dump($_POST);
-    // echo '<pre>';
-
     $email = mysqli_real_escape_string($bd, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
     $password = mysqli_real_escape_string($bd, $_POST['password']);
 
@@ -41,17 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['usuario'] = $usuario['email'];
                 $_SESSION['login'] = true;
 
-
-                echo '<pre>';
-                var_dump($_SESSION);
-                echo '<pre>';
+                header('Location: /admin');
             } else {
                 $errores[] = 'El password es incorrecto';
             }
-
-            // echo '<pre>';
-            // var_dump($usuario);
-            // echo '<pre>';
         } else {
             $errores[] = "El usuario no existe";
         }
