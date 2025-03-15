@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+$auth = $_SESSION['login'];
+
+if(!$auth) {
+    header('Location: /');
+}
 
 $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
