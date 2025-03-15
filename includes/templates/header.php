@@ -1,3 +1,15 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+
+$auth = $_SESSION['login'] ?? false;
+
+// echo __DIR__ . "/admin/cerrar-sesion.php";
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +39,10 @@
                         <a href="anuncios.php">Anuncios</a>
                         <a href="blog.php">Blog</a>
                         <a href="contacto.php">Contacto</a>
+                        <?php if ($auth): ?>
+                            <a href="/admin/cerrar-sesion.php">Cerrar sesión</a>
+                        <?php endif; ?>
+
                     </nav>
                 </div>
             </div>
