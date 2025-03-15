@@ -1,6 +1,12 @@
 <?php
-require 'includes/config/database.php';
 require 'includes/funciones.php';
+$auth = estaAutenticado();
+
+if (!$auth) {
+    header('Location: /');
+}
+
+require 'includes/config/database.php';
 
 // BDs
 $db = conectarBD();
