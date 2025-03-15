@@ -6,7 +6,6 @@
             "type": "shell",
             "command": "php -S localhost:3000",
             "problemMatcher": [],
-            "isBackground": true,
             "presentation": {
                 "reveal": "always"
             },
