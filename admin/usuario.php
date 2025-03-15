@@ -9,11 +9,7 @@ $password = "123456";
 
 $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-// var_dump($passwordHash);
-
-
 // Query para crear el usuario
-// exit;
 $query = "INSERT INTO usuarios (email, password) VALUES ('" . $email . "' , '" . $passwordHash . "');";
 
 echo $query;

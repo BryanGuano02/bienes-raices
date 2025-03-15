@@ -13,7 +13,6 @@ if (!$id) {
     header('Location: /admin');
 }
 
-
 require 'includes/config/database.php';
 
 // BDs
