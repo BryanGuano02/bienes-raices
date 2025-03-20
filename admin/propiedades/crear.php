@@ -1,14 +1,9 @@
 <?php
-require 'includes/funciones.php';
-$auth = estaAutenticado();
+require 'includes/app.php';
 
-if (!$auth) {
-    header('Location: /');
-}
+estaAutenticado();
 
-require 'includes/config/database.php';
 
-// BDs
 $db = conectarBD();
 
 $consulta = 'SELECT * FROM vendedores;';
