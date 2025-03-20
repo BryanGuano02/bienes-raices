@@ -1,8 +1,5 @@
 <?php
-require 'includes/config/database.php';
 $db = conectarBD();
-
-
 
 $query = "SELECT * FROM propiedades LIMIT " . $limite;
 $resultado = mysqli_query($db, $query);
@@ -32,7 +29,7 @@ $resultado = mysqli_query($db, $query);
 
                     </li>
                 </ul>
-                <a href="anuncio.php?id=<?php echo $propiedad['id']?>" class="boton-amarillo-block">
+                <a href="anuncio.php?id=<?php echo $propiedad['id'] ?>" class="boton-amarillo-block">
                     Ver Propiedad
                 </a>
             </div>

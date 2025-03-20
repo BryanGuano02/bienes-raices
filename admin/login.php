@@ -1,5 +1,5 @@
 <?php
-require 'includes/config/database.php';
+require 'includes/app.php';
 $bd = conectarBD();
 
 $errores = [];
@@ -45,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require 'includes/funciones.php';
 incluirTemplate('header');
 ?>
 <main class="contenedor seccion contenido-centrado">
