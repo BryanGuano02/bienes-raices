@@ -1,0 +1,17 @@
+{
+    "name": "alejo/bienes-raices",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Bryan Guano",
+            "email": "alejoguano@hotmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "./clases"
+        }
+    }
+}
