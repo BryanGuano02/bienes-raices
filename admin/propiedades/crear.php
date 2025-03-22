@@ -1,6 +1,8 @@
 <?php
-require 'includes/app.php';
+require '../../includes/app.php';
 use App\Propiedad;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager as Image;
 
 estaAutenticado();
 
@@ -10,8 +12,6 @@ $consulta = 'SELECT * FROM vendedores;';
 $resultado = mysqli_query($db, $consulta);
 
 $errores = Propiedad::getErrores();
-
-debuguear($errores);
 
 $titulo = '';
 $precio = '';
@@ -24,27 +24,33 @@ $creado = date('Y/m/d');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $propiedad = new Propiedad($_POST);
-    $propiedad->guardar();
+    $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
-    $imagen = isset($_FILES['imagen']) ? $_FILES['imagen'] : null;
-
-
+    if ($_FILES['imagen']['tmp_name']) {
+        $manager = new Image(Driver::class);
+        $imagen = $manager->read($_FILES['imagen']['tmp_name'])->cover(800, 600);
+        $propiedad->setImagen($nombreImagen);
+    }
+    $errores = $propiedad->validar();
 
     if (empty($errores)) {
-        $nombreCarpeta = 'imagenes/';
+        echo "Ruta de carpeta: " . CARPETA_IMAGENES . "<br>";
+        echo "¿Existe la carpeta? " . (is_dir(CARPETA_IMAGENES) ? 'Sí' : 'No') . "<br>";
+        echo "¿Es escribible? " . (is_writable(CARPETA_IMAGENES) ? 'Sí' : 'No') . "<br>";
 
-        $ruta = dirname(__DIR__, 2) . '/' . $nombreCarpeta;
-
-        if (!file_exists($ruta)) {
-            mkdir($ruta, 0777, true);
+        // $nombreCarpetaImagenes  = dirname(__DIR__, 2) . '/imagenes/';
+        if (!is_dir(CARPETA_IMAGENES)) {
+            mkdir(CARPETA_IMAGENES, 0755, true);
         }
 
-        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+        // if (!file_exists($nombreCarpetaImagenes)) {
+        //     mkdir($nombreCarpetaImagenes, 0777, true);
+        // }
 
-        move_uploaded_file($imagen['tmp_name'], $ruta . $nombreImagen);
+        // $imagen->save($nombreCarpetaImagenes . $nombreImagen);
+        $imagen->save(CARPETA_IMAGENES . $nombreImagen);
 
-
-        $resultado = mysqli_query($db, $query);
+        $resultado = $propiedad->guardar();
 
         if ($resultado) {
             header('Location: /admin?resultado=1');
