@@ -1,5 +1,5 @@
 <?php
-require 'includes/funciones.php';
+require '../../includes/funciones.php';
 estaAutenticado();
 
 $id = $_GET['id'];
@@ -9,7 +9,7 @@ if (!$id) {
     header('Location: /admin');
 }
 
-require 'includes/config/database.php';
+require '../../includes/config/database.php';
 
 // BDs
 $db = conectarBD();

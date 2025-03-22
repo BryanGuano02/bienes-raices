@@ -32,7 +32,7 @@ class Propiedad
         $this->id = $args['id'] ?? null;
         $this->titulo = $args['titulo'] ?? '';
         $this->precio = $args['precio'] ?? '';
-        $this->imagen = $args['imagen'] ?? 'imagen.jpg';
+        $this->imagen = $args['imagen'] ?? '';
         $this->descripcion = $args['descripcion'] ?? '';
         $this->habitaciones = $args['habitaciones'] ?? '';
         $this->wc = $args['wc'] ?? '';
@@ -54,10 +54,8 @@ class Propiedad
         $query .= $valoresAtributos;
         $query .= " ')";
 
-        debuguear($query);
-
         $resultado = self::$bd->query($query);
-        debuguear($resultado);
+        return $resultado;
     }
 
     public function atributos()
@@ -115,20 +113,21 @@ class Propiedad
             self::$errores[] = "Debes añadir el número de estacionamientos";
         }
 
-
         if (!$this->vendedorId) {
             self::$errores[] = "Debes elegir el vendedor";
         }
-        if (!$this->imagen['name'] || $this->imagen['error']) {
+
+        if (!$this->imagen) {
             self::$errores[] = 'La imagen es obligatoria';
         }
 
-        $ancho = 1000;
-        $alto = 100;
-        $medida = $ancho * $alto;
+        return self::$errores;
+    }
 
-        if ($this->imagen['size'] > $medida) {
-            self::$errores[] = 'La imagen es demasiado grande';
+    public function setImagen($imagen)
+    {
+        if ($imagen) {
+            $this->imagen = $imagen;
         }
     }
 }

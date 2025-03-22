@@ -1,6 +1,6 @@
 <?php
 // Importar la conexión
-require 'includes/app.php';
+require '../includes/app.php';
 $bd = conectarBD();
 
 // Crear un email y password

@@ -1,5 +1,5 @@
 <?php
-require 'includes/app.php';
+require '../includes/app.php';
 
 incluirTemplate('header');
 ?>
@@ -9,7 +9,7 @@ incluirTemplate('header');
 
         <?php
         $limite = 6;
-        include 'includes/templates/anuncios.php'
+        include '../includes/templates/anuncios.php'
             ?>
     </section>
 </main>
