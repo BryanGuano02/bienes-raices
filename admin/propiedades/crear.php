@@ -4,7 +4,6 @@ use App\Propiedad;
 
 estaAutenticado();
 
-
 $db = conectarBD();
 
 $consulta = 'SELECT * FROM vendedores;';

@@ -42,7 +42,17 @@ class Propiedad
     public function guardar()
     {
         $atributos = $this->sanitizasDatos();
-        $query = "INSERT INTO propiedades (titulo, precio, imageHermosa casa de la playan, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ('$this->titulo','$this->precio', '$this->imagen', '$this->descripcion', '$this->habitaciones', '$this->wc', '$this->estacionamiento', '$this->creado', '$this->vendedorId')";
+
+        $nombresAtributos = join(', ', array_keys($atributos));
+        $valoresAtributos = join("', '", array_values($atributos));
+
+        $query = "INSERT INTO propiedades ( ";
+        $query .= $nombresAtributos;
+        $query .= " ) VALUES (' ";
+        $query .= $valoresAtributos;
+        $query .= " ')";
+
+        debuguear($query);
 
         $resultado = self::$bd->query($query);
         debuguear($resultado);
