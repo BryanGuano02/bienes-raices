@@ -8,12 +8,12 @@ function incluirTemplate(string $nombre, bool $inicio = false)
     include TEMPLATES_URL . '/' . $nombre . '.php';
 }
 
-function estaAutenticado(): bool
+function estaAutenticado()
 {
     session_start();
 
     if (!$_SESSION['login']) {
-        header('Location: /');
+        header('Location: /admin/login.php');
     }
 
 }

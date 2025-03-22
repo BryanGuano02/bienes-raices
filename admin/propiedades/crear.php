@@ -1,5 +1,6 @@
 <?php
 require 'includes/app.php';
+use App\Propiedad;
 
 estaAutenticado();
 
@@ -21,6 +22,12 @@ $vendedorId = '';
 $creado = date('Y/m/d');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $propiedad = new Propiedad($_POST);
+    $propiedad->guardar();
+
+    debuguear($propiedad);
+
+    debuguear($propiedad);
     $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
     $precio = mysqli_real_escape_string($db, $_POST['precio']);
     $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
@@ -84,7 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         move_uploaded_file($imagen['tmp_name'], $ruta . $nombreImagen);
 
-        $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ('$titulo','$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
 
         $resultado = mysqli_query($db, $query);
 
