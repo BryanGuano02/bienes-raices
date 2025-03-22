@@ -10,6 +10,8 @@ class Propiedad
     protected static $bd;
     protected static $columnas_BD = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId'];
 
+    protected static $errores = [];
+
     public $id;
     public $titulo;
     public $precio;
@@ -74,11 +76,59 @@ class Propiedad
         $atributos = $this->atributos();
         $sanitizado = [];
 
-        foreach($atributos as $key => $valor) {
+        foreach ($atributos as $key => $valor) {
             $sanitizado[$key] = self::$bd->escape_string($valor);
         }
 
         return $sanitizado;
 
+    }
+
+    public static function getErrores()
+    {
+        return self::$errores;
+    }
+
+    public function validar()
+    {
+        if (!$this->titulo) {
+            self::$errores[] = "Debes añadir un título";
+        }
+
+        if (!$this->precio) {
+            self::$errores[] = "Debes añadir un precio";
+        }
+
+        if (strlen($this->descripcion) < 50) {
+            self::$errores[] = "Debes añadir una descripción y debe tener al menos 50 caracteres";
+        }
+
+        if (!$this->habitaciones) {
+            self::$errores[] = "Debes añadir el número de habitaciones";
+        }
+
+        if (!$this->wc) {
+            self::$errores[] = "Debes añadir el número de baños";
+        }
+
+        if (!$this->estacionamiento) {
+            self::$errores[] = "Debes añadir el número de estacionamientos";
+        }
+
+
+        if (!$this->vendedorId) {
+            self::$errores[] = "Debes elegir el vendedor";
+        }
+        if (!$this->imagen['name'] || $this->imagen['error']) {
+            self::$errores[] = 'La imagen es obligatoria';
+        }
+
+        $ancho = 1000;
+        $alto = 100;
+        $medida = $ancho * $alto;
+
+        if ($this->imagen['size'] > $medida) {
+            self::$errores[] = 'La imagen es demasiado grande';
+        }
     }
 }

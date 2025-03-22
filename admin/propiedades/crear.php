@@ -9,7 +9,9 @@ $db = conectarBD();
 $consulta = 'SELECT * FROM vendedores;';
 $resultado = mysqli_query($db, $consulta);
 
-$errores = [];
+$errores = Propiedad::getErrores();
+
+debuguear($errores);
 
 $titulo = '';
 $precio = '';
@@ -24,58 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $propiedad = new Propiedad($_POST);
     $propiedad->guardar();
 
-    debuguear($propiedad);
-
-    debuguear($propiedad);
-    $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
-    $precio = mysqli_real_escape_string($db, $_POST['precio']);
-    $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
-    $habitaciones = mysqli_real_escape_string($db, $_POST['habitaciones']);
-    $wc = mysqli_real_escape_string($db, $_POST['wc']);
-    $estacionamiento = mysqli_real_escape_string($db, $_POST['estacionamiento']);
-    $vendedorId = isset($_POST['vendedorId']) ? mysqli_real_escape_string($db, $_POST['vendedorId']) : null;
     $imagen = isset($_FILES['imagen']) ? $_FILES['imagen'] : null;
 
 
-    if (!$titulo) {
-        $errores[] = "Debes añadir un título";
-    }
-
-    if (!$precio) {
-        $errores[] = "Debes añadir un precio";
-    }
-
-    if (strlen($descripcion) < 50) {
-        $errores[] = "Debes añadir una descripción y debe tener al menos 50 caracteres";
-    }
-
-    if (!$habitaciones) {
-        $errores[] = "Debes añadir el número de habitaciones";
-    }
-
-    if (!$wc) {
-        $errores[] = "Debes añadir el número de baños";
-    }
-
-    if (!$estacionamiento) {
-        $errores[] = "Debes añadir el número de estacionamientos";
-    }
-
-
-    if (!$vendedorId) {
-        $errores[] = "Debes elegir el vendedor";
-    }
-    if (!$imagen['name'] || $imagen['error']) {
-        $errores[] = 'La imagen es obligatoria';
-    }
-
-    $ancho = 1000;
-    $alto = 100;
-    $medida = $ancho * $alto;
-
-    if ($imagen['size'] > $medida) {
-        $errores[] = 'La imagen es demasiado grande';
-    }
 
     if (empty($errores)) {
         $nombreCarpeta = 'imagenes/';
