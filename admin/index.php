@@ -1,9 +1,8 @@
 <?php
-require '../includes/funciones.php';
+require '../includes/app.php';
 estaAutenticado();
 
 // Importar conexion
-require '../includes/config/database.php';
 $db = conectarBD();
 
 // Escribir el query
