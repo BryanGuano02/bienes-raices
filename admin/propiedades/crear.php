@@ -34,20 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errores = $propiedad->validar();
 
     if (empty($errores)) {
-        echo "Ruta de carpeta: " . CARPETA_IMAGENES . "<br>";
-        echo "¿Existe la carpeta? " . (is_dir(CARPETA_IMAGENES) ? 'Sí' : 'No') . "<br>";
-        echo "¿Es escribible? " . (is_writable(CARPETA_IMAGENES) ? 'Sí' : 'No') . "<br>";
-
-        // $nombreCarpetaImagenes  = dirname(__DIR__, 2) . '/imagenes/';
         if (!is_dir(CARPETA_IMAGENES)) {
             mkdir(CARPETA_IMAGENES, 0755, true);
         }
 
-        // if (!file_exists($nombreCarpetaImagenes)) {
-        //     mkdir($nombreCarpetaImagenes, 0777, true);
-        // }
-
-        // $imagen->save($nombreCarpetaImagenes . $nombreImagen);
         $imagen->save(CARPETA_IMAGENES . $nombreImagen);
 
         $resultado = $propiedad->guardar();
