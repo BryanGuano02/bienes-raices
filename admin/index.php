@@ -4,13 +4,6 @@ estaAutenticado();
 
 // Importar conexion
 $db = conectarBD();
-
-// Escribir el query
-$query = 'SELECT * FROM propiedades;';
-
-// Consultar la BD
-$resultadoConsulta = mysqli_query($db, $query);
-
 // Mostrar resultados
 
 // Mensaje condicional
