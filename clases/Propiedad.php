@@ -2,8 +2,6 @@
 
 namespace App;
 
-
-
 class Propiedad
 {
 
@@ -129,5 +127,37 @@ class Propiedad
         if ($imagen) {
             $this->imagen = $imagen;
         }
+    }
+
+    public static function getAll()
+    {
+        $query = "SELECT * FROM propiedades";
+        $propiedades = self::consultarSQL($query);
+        return $propiedades;
+    }
+
+    public static function consultarSQL($query)
+    {
+        $resultado = self::$bd->query($query);
+
+        $objetosObtenidos = [];
+
+        while ($registro = $resultado->fetch_assoc()) {
+            $objetosObtenidos[] = self::crearObjeto($registro);
+        }
+
+        $resultado->free();
+        return $objetosObtenidos;
+    }
+
+    protected static function crearObjeto($registro)
+    {
+        $objeto = new self;
+        foreach ($registro as $key => $value) {
+            if (property_exists($objeto, $key)) {
+                $objeto->$key = $value;
+            }
+        }
+        return $objeto;
     }
 }

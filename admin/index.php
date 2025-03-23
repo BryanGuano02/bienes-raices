@@ -2,12 +2,13 @@
 require '../includes/app.php';
 estaAutenticado();
 
-// Importar conexion
-$db = conectarBD();
-// Mostrar resultados
+use App\Propiedad;
 
-// Mensaje condicional
-$resultado = $_GET['resultado'] ?? null;
+$propiedades = Propiedad::getAll();
+
+
+    // Mensaje condicional
+    $resultado = $_GET['resultado'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
