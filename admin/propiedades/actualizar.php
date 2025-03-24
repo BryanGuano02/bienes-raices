@@ -1,6 +1,6 @@
 <?php
-
 use App\Propiedad;
+use Intervention\Image\ImageManager as Image;
 require '../../includes/app.php';
 estaAutenticado();
 
@@ -15,85 +15,25 @@ if (!$id) {
 $propiedad = Propiedad::get($id);
 
 $consulta = 'SELECT * FROM vendedores;';
-// $resultado = mysqli_query($db, $consulta);
 
-$errores = [];
+$errores = Propiedad::getErrores();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $args = $_POST['propiedad'];
     $propiedad->sincronizar($args);
 
-    debuguear($propiedad);
+    $errores = $propiedad->validar();
 
+    $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
-    // $imagen = isset($_FILES['imagen']) ? $_FILES['imagen'] : null;
-
-
-    if (!$titulo) {
-        $errores[] = "Debes añadir un título";
-    }
-
-    if (!$precio) {
-        $errores[] = "Debes añadir un precio";
-    }
-
-    if (strlen($descripcion) < 50) {
-        $errores[] = "Debes añadir una descripción y debe tener al menos 50 caracteres";
-    }
-
-    if (!$habitaciones) {
-        $errores[] = "Debes añadir el número de habitaciones";
-    }
-
-    if (!$wc) {
-        $errores[] = "Debes añadir el número de baños";
-    }
-
-    if (!$estacionamiento) {
-        $errores[] = "Debes añadir el número de estacionamientos";
-    }
-
-
-    if (!$vendedorId) {
-        $errores[] = "Debes elegir el vendedor";
-    }
-
-    $ancho = 1000;
-    $alto = 100;
-    $medida = $ancho * $alto;
-
-    if ($imagen['size'] > $medida) {
-        $errores[] = 'La imagen es demasiado grande';
+    if ($_FILES['propiedad']['tmp_name']['imagen']) {
+        $imagen = $manager->read($_FILES['propiedad']['tmp_name']['imagen'])->cover(800, 600);
+        $propiedad->setImagen($nombreImagen);
     }
 
     if (empty($errores)) {
-        $nombreCarpeta = 'imagenes/';
-
-        $rutaCarpeta = dirname(__DIR__, 2) . '/' . $nombreCarpeta;
-
-        if (!file_exists($rutaCarpeta)) {
-            mkdir($rutaCarpeta, 0777, true);
-        }
-
-        $nombreImagen = '';
-
-        if ($imagen['name']) {
-            unlink($nombreCarpeta . $propiedad['imagen']);
-            $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-
-            move_uploaded_file($imagen['tmp_name'], $ruta . $nombreImagen);
-        } else {
-            $nombreImagen = $propiedad['imagen'];
-        }
-
-
-        $query = "UPDATE propiedades SET titulo = '" . $titulo . "', precio = " . $precio . ", imagen = '" . $nombreImagen . "', descripcion = '" . $descripcion . "', habitaciones = " . $habitaciones . ", wc = " . $wc . ", estacionamiento = " . $estacionamiento . ", vendedorId = " . $vendedorId . " WHERE id = " . $id;
-
-        $resultado = mysqli_query($db, $query);
-
-        if ($resultado) {
-            header('Location: /admin?resultado=2');
-        }
+        $image->save(CARPETA_IMAGENES . $nombreImagen);
+        $propiedad->guardar();
     }
 }
 
