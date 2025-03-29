@@ -1,8 +1,9 @@
 <?php
 require '../../includes/app.php';
-use App\Propiedad;
-use Intervention\Image\Drivers\Gd\Driver;
+require '../../vendor/autoload.php';
+
 use Intervention\Image\ImageManager as Image;
+use App\Propiedad;
 
 estaAutenticado();
 
@@ -21,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
     if ($_FILES['propiedad']['tmp_name']['imagen']) {
-        $manager = new Image(Driver::class);
         $imagen = $manager->read($_FILES['propiedad']['tmp_name']['imagen'])->cover(800, 600);
         $propiedad->setImagen($nombreImagen);
     }

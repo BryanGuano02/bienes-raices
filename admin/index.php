@@ -7,26 +7,17 @@ use App\Propiedad;
 $propiedades = Propiedad::getAll();
 
 
-    // Mensaje condicional
-    $resultado = $_GET['resultado'] ?? null;
+// Mensaje condicional
+$resultado = $_GET['resultado'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
     if ($id) {
-        $queryImagen = "SELECT imagen FROM propiedades WHERE id = " . $id;
-        $resultadoImagen = mysqli_query($db, $queryImagen);
-        $imagenAEliminar = mysqli_fetch_assoc($resultadoImagen);
+        $propiedad = Propiedad::get($id);
 
-        unlink('imagenes/' . $imagenAEliminar['imagen']);
-
-        $queryEliminacion = "DELETE FROM propiedades WHERE id = " . $id;
-        $resultadoEliminacion = mysqli_query($db, $queryEliminacion);
-
-        if ($resultadoEliminacion) {
-            header('location: /admin?resultado=3');
-        }
+        $propiedad->eliminar();
     }
 }
 
@@ -55,7 +46,7 @@ incluirTemplate('header');
             </tr>
         </thead>
         <tbody>
-            <?php foreach($propiedades as $propiedad): ?>
+            <?php foreach ($propiedades as $propiedad): ?>
                 <tr>
                     <td><?php echo $propiedad->id; ?></td>
                     <td><?php echo $propiedad->titulo; ?></td>
