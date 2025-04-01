@@ -6,7 +6,7 @@
 }
 
 .boton-amarillo {
-    @include m.boton(v.$amarillo, block);
+    @include m.boton(v.$amarillo, inline-block);
 }
 
 .boton-amarillo-block {

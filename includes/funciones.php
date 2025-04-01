@@ -4,13 +4,11 @@ define('TEMPLATES_URL', __DIR__ . '/templates');
 define('FUNCIONES_URL', 'funciones.php');
 define('CARPETA_IMAGENES', dirname(__DIR__, 1) . '/imagenes/');
 
-function incluirTemplate(string $nombre, bool $inicio = false)
-{
+function incluirTemplate(string $nombre, bool $inicio = false) {
     include TEMPLATES_URL . '/' . $nombre . '.php';
 }
 
-function estaAutenticado()
-{
+function estaAutenticado() {
     session_start();
 
     if (!$_SESSION['login']) {
@@ -19,8 +17,7 @@ function estaAutenticado()
 
 }
 
-function debuguear($variable)
-{
+function debuguear($variable) {
     echo "<pre>";
     var_dump($variable);
     echo "</pre>";
@@ -28,8 +25,13 @@ function debuguear($variable)
     exit;
 }
 
-function sanitizar($dato): string
-{
+function sanitizar($dato): string {
     $datoSanitizado = htmlspecialchars($dato);
     return $datoSanitizado;
+}
+
+function validarTipoContenido($tipo) {
+    $tipos = ['vendedor', 'propiedad'];
+
+    return in_array($tipo, $tipos);
 }
