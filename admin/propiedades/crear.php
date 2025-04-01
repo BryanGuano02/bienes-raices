@@ -2,17 +2,16 @@
 require '../../includes/app.php';
 require '../../vendor/autoload.php';
 
-use Intervention\Image\ImageManager as Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 use App\Propiedad;
+use App\Vendedor;
 
 estaAutenticado();
 
-$db = conectarBD();
-
 $propiedad = new Propiedad();
 
-$consulta = 'SELECT * FROM vendedores;';
-$resultado = mysqli_query($db, $consulta);
+$vendedores = Vendedor::getAll();
 
 $errores = Propiedad::getErrores();
 
@@ -22,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
     if ($_FILES['propiedad']['tmp_name']['imagen']) {
+        $manager = new ImageManager(new Driver());
         $imagen = $manager->read($_FILES['propiedad']['tmp_name']['imagen'])->cover(800, 600);
         $propiedad->setImagen($nombreImagen);
     }

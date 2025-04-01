@@ -12,11 +12,12 @@
     <input type="file" name="propiedad[imagen]" id="imagen" accept="image/jpeg, image/png">
 
     <?php if ($propiedad->imagen): ?>
-<img src="/imagenes/<?php echo $propiedad->imagen ?>" alt="Imagen actual de la propiedad" class="imagen-small">
+        <img src="/imagenes/<?php echo $propiedad->imagen ?>" alt="Imagen actual de la propiedad" class="imagen-small">
     <?php endif; ?>
 
     <label for="descripcion">Descripción</label>
-    <textarea id="descripcion" name="propiedad[descripcion]"><?php echo sanitizar($propiedad->descripcion); ?></textarea>
+    <textarea id="descripcion"
+        name="propiedad[descripcion]"><?php echo sanitizar($propiedad->descripcion); ?></textarea>
 
 </fieldset>
 
@@ -38,4 +39,12 @@
 
 <fieldset>
     <legend>Vendedor</legend>
+    <label for="vendedor">Vendedor</label>
+    <select name="propiedad[vendedorId]" id="vendedor">
+        <option selected  value="">-- Seleccione--</option>
+        <?php foreach ($vendedores as $vendedor) { ?>
+            <option <?php echo $propiedad->vendedorId == $vendedor->id ? 'selected' : '';?> value="<?php echo sanitizar($vendedor->id); ?>"><?php echo sanitizar($vendedor->nombre) . " " . sanitizar($vendedor->apellido); ?>
+            </option>
+        <?php } ?>
+    </select>
 </fieldset>

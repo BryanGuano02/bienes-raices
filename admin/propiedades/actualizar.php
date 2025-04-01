@@ -1,5 +1,6 @@
 <?php
 use App\Propiedad;
+use App\Vendedor;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 require '../../includes/app.php';
@@ -15,7 +16,7 @@ if (!$id) {
 // Consulta para los datos de la propiedad
 $propiedad = Propiedad::get($id);
 
-$consulta = 'SELECT * FROM vendedores;';
+$vendedores = Vendedor::getAll();
 
 $errores = Propiedad::getErrores();
 

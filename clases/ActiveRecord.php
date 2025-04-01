@@ -2,39 +2,18 @@
 
 namespace App;
 
-class ActiveRecord {
+class ActiveRecord
+{
     protected static $bd;
-    protected static $columnas_BD = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId'];
+    protected static $columnas_BD = '';
+    protected static $tabla = '';
 
     protected static $errores = [];
 
-    public $id;
-    public $titulo;
-    public $precio;
-    public $imagen;
-    public $descripcion;
-    public $habitaciones;
-    public $wc;
-    public $estacionamiento;
-    public $creado;
-    public $vendedorId;
 
     public static function setBD($database)
     {
         self::$bd = $database;
-    }
-    public function __construct($args = [])
-    {
-        $this->id = $args['id'] ?? null;
-        $this->titulo = $args['titulo'] ?? '';
-        $this->precio = $args['precio'] ?? '';
-        $this->imagen = $args['imagen'] ?? '';
-        $this->descripcion = $args['descripcion'] ?? '';
-        $this->habitaciones = $args['habitaciones'] ?? '';
-        $this->wc = $args['wc'] ?? '';
-        $this->estacionamiento = $args['estacionamiento'] ?? '';
-        $this->creado = date('Y/m/d');
-        $this->vendedorId = $args['vendedorId'] ?? 1;
     }
 
     public function guardar()
@@ -48,12 +27,12 @@ class ActiveRecord {
 
     public function crear()
     {
-        $atributos = $this->sanitizasDatos();
+        $atributos = $this->sanitizarDatos();
 
         $nombresAtributos = join(', ', array_keys($atributos));
         $valoresAtributos = join("', '", array_values($atributos));
 
-        $query = "INSERT INTO propiedades ( ";
+        $query = "INSERT INTO " . static::$tabla . " ( ";
         $query .= $nombresAtributos;
         $query .= " ) VALUES (' ";
         $query .= $valoresAtributos;
@@ -68,13 +47,13 @@ class ActiveRecord {
 
     public function actualizar()
     {
-        $atributos = $this->sanitizasDatos();
+        $atributos = $this->sanitizarDatos();
 
         $valores = [];
         foreach ($atributos as $key => $value) {
             $valores[] = "{$key} = '{$value}'";
         }
-        $query = "UPDATE propiedades SET ";
+        $query = "UPDATE ". static::$tabla ." SET ";
         $query .= join(', ', $valores);
         $query .= " WHERE id = '" . self::$bd->escape_string($this->id) . "' ";
         $query .= " LIMIT 1 ";
@@ -88,7 +67,7 @@ class ActiveRecord {
 
     public function eliminar()
     {
-        $query = "DELETE FROM propiedades WHERE id = " . self::$bd->escape_string($this->id) . " LIMIT 1";
+        $query = "DELETE FROM ". static::$tabla ." WHERE id = " . self::$bd->escape_string($this->id) . " LIMIT 1";
         $resultado = self::$bd->query($query);
 
         if ($resultado) {
@@ -101,7 +80,7 @@ class ActiveRecord {
     public function atributos()
     {
         $atributos = [];
-        foreach (self::$columnas_BD as $columna) {
+        foreach (static::$columnas_BD as $columna) {
             if ($columna === 'id')
                 continue;
             $atributos[$columna] = $this->$columna;
@@ -109,7 +88,7 @@ class ActiveRecord {
         return $atributos;
     }
 
-    public function sanitizasDatos()
+    public function sanitizarDatos()
     {
         $atributos = $this->atributos();
         $sanitizado = [];
@@ -123,44 +102,13 @@ class ActiveRecord {
 
     public static function getErrores()
     {
-        return self::$errores;
+        return static::$errores;
     }
 
     public function validar()
     {
-        if (!$this->titulo) {
-            self::$errores[] = "Debes añadir un título";
-        }
-
-        if (!$this->precio) {
-            self::$errores[] = "Debes añadir un precio";
-        }
-
-        if (strlen($this->descripcion) < 50) {
-            self::$errores[] = "Debes añadir una descripción y debe tener al menos 50 caracteres";
-        }
-
-        if (!$this->habitaciones) {
-            self::$errores[] = "Debes añadir el número de habitaciones";
-        }
-
-        if (!$this->wc) {
-            self::$errores[] = "Debes añadir el número de baños";
-        }
-
-        if (!$this->estacionamiento) {
-            self::$errores[] = "Debes añadir el número de estacionamientos";
-        }
-
-        if (!$this->vendedorId) {
-            self::$errores[] = "Debes elegir el vendedor";
-        }
-
-        if (!$this->imagen) {
-            self::$errores[] = 'La imagen es obligatoria';
-        }
-
-        return self::$errores;
+        static::$errores = [];
+        return static::$errores;
     }
 
     public function setImagen($imagen)
@@ -183,14 +131,14 @@ class ActiveRecord {
 
     public static function getAll()
     {
-        $query = "SELECT * FROM propiedades";
+        $query = "SELECT * FROM " . static::$tabla;
         $propiedades = self::consultarSQL($query);
         return $propiedades;
     }
 
     public static function get($id)
     {
-        $query = 'SELECT * FROM propiedades WHERE id = ' . $id;
+        $query = 'SELECT * FROM ' . static::$tabla . ' WHERE id = ' . $id;
 
         $resultado = self::consultarSQL($query);
 
@@ -207,7 +155,7 @@ class ActiveRecord {
         $objetosObtenidos = [];
 
         while ($registro = $resultado->fetch_assoc()) {
-            $objetosObtenidos[] = self::crearObjeto($registro);
+            $objetosObtenidos[] = static::crearObjeto($registro);
         }
 
         $resultado->free();
@@ -216,7 +164,7 @@ class ActiveRecord {
 
     protected static function crearObjeto($registro)
     {
-        $objeto = new self;
+        $objeto = new static;
         foreach ($registro as $key => $value) {
             if (property_exists($objeto, $key)) {
                 $objeto->$key = $value;
