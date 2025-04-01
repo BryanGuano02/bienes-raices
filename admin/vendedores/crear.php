@@ -23,7 +23,7 @@ incluirTemplate('header');
 
 
 <main class="contenedor seccion">
-    <h1>Registrar Vendedores</h1>
+    <h1>Registrar Vendedor(a)</h1>
 
     <?php foreach ($errores as $error): ?>
         <div class="alerta error">
