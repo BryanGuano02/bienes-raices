@@ -135,6 +135,13 @@ class ActiveRecord
         $propiedades = self::consultarSQL($query);
         return $propiedades;
     }
+    public static function getAnunciosLimite($cantidadAnuncios)
+    {
+        $query = "SELECT * FROM " . static::$tabla . " LIMIT " . $cantidadAnuncios;
+        $propiedades = self::consultarSQL($query);
+        return $propiedades;
+    }
+
 
     public static function get($id)
     {
