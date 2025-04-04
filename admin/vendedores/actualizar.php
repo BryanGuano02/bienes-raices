@@ -18,7 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $args = $_POST['vendedor'];
     $vendedor->sincronizar($args);
 
+    $errores = $vendedor->validar();
     if (empty($errores)) {
+        $vendedor->guardar();
     }
 }
 
