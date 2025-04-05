@@ -13,11 +13,8 @@ if (!$id) {
     header('Location: /admin');
 }
 
-// Consulta para los datos de la propiedad
 $propiedad = Propiedad::get($id);
-
 $vendedores = Vendedor::getAll();
-
 $errores = Propiedad::getErrores();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
