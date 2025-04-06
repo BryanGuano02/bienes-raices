@@ -3,7 +3,27 @@
 namespace MVC;
 
 class Router {
-    public function __construct() {
-        echo "funcionando";
+
+    public $rutasGET = [];
+    public $rutasPOST = [];
+
+    public function get($url, $funcion) {
+        $this->rutasGET[$url] = $funcion;
+    }
+
+    public function comprobarRutas() {
+        $urlActual = $_SERVER['PATH_INFO'];
+        $metodo = $_SERVER['REQUEST_METHOD'];
+
+        if($metodo === 'GET'){
+            $fn = $this->rutasGET[$urlActual] ?? null;
+        }
+
+        if(!$fn){
+            echo 'Página no encontrada';
+        }
+
+        call_user_func($fn, $this);
+
     }
 }
