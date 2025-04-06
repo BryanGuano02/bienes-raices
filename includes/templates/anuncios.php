@@ -1,5 +1,5 @@
 <?php
-use App\Propiedad;
+use Model\Propiedad;
 
 if ($_SERVER['SCRIPT_NAME'] === '/build/index.php') {
     $propiedades = Propiedad::getAnunciosLimite($cantidadAnuncios);
