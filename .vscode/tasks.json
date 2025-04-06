@@ -4,7 +4,7 @@
         {
             "label": "Run PHP Server",
             "type": "shell",
-            "command": "php -S localhost:3000",
+            "command": "php -S localhost:3000 -t public",
             "problemMatcher": [],
             "presentation": {
                 "reveal": "always"
