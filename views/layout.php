@@ -1,3 +1,14 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+$auth = $_SESSION['login'] ?? false;
+
+if (!isset($inicio)) {
+    $inicio = false;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienes Raices</title>
-    <link rel="stylesheet" href="/build/css/app.css">
+    <link rel="stylesheet" href="../build/css/app.css">
 </head>
 
 <body>
@@ -40,6 +51,8 @@
         </div>
     </header>
 
+    <?php echo $contenido; ?>
+
     <footer class="footer seccion">
         <div class="contenedor contenedor-footer">
             <nav class="navegacion">
@@ -51,7 +64,7 @@
         </div>
         <p class="copyright">Todos los derechos Reservados <?php echo date('Y'); ?> &copy;</p>
     </footer>
-    <script src="/build/js/bundle.min.js"></script>
+    <script src="../build/js/bundle.min.js"></script>
 </body>
 
 </html>
