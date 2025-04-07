@@ -26,7 +26,12 @@ class Router {
         call_user_func($fn, $this);
     }
 
-    public function render($view) {
+    public function render($view, $datos =[]) {
+
+        foreach ($datos as $key => $value) {
+            $$key = $value;
+        }
+
         ob_start();
         include __DIR__ . "/views/" . $view . ".php";
         $contenido = ob_get_clean();
