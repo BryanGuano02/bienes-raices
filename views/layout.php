@@ -8,8 +8,6 @@ $auth = $_SESSION['login'] ?? false;
 if (!isset($inicio)) {
     $inicio = false;
 }
-
-echo $mensaje;
 ?>
 <!DOCTYPE html>
 <html lang="en">
