@@ -14,5 +14,4 @@ $router->get('/propiedad/actualizar', [PropiedadController::class, 'actualizar']
 $router->post('/propiedad/actualizar', [PropiedadController::class, 'actualizar']);
 $router->post('/propiedad/eliminar', [PropiedadController::class, 'eliminar']);
 
-
 $router->comprobarRutas();
