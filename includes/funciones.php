@@ -36,10 +36,10 @@ function validarTipoContenido($tipo) {
     return in_array($tipo, $tipos);
 }
 
-function mostrarNotificacion($codigo){
+function mostrarNotificacion($codigo) {
     $mensaje = '';
 
-    switch($codigo) {
+    switch ($codigo) {
         case 1:
             $mensaje = 'Creado correctamente';
             break;
@@ -54,4 +54,15 @@ function mostrarNotificacion($codigo){
             break;
     }
     return $mensaje;
+}
+
+function verificarId($url) {
+    $id = $_GET['id'];
+    $id = filter_var($id, FILTER_VALIDATE_INT);
+
+    if (!$id) {
+        header('Location: ' . $url);
+    }
+
+    return $id;
 }

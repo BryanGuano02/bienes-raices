@@ -57,8 +57,13 @@ class PropiedadController {
 
     }
 
-    public static function actualizar() {
+    public static function actualizar(Router $router) {
+        $id = verificarId('/admin');
 
-        echo "actualizando";
+        $propiedad = Propiedad::get($id);
+
+        $router->render('propiedades/actualizar', [
+            'propiedad' => $propiedad
+        ]);
     }
 }
