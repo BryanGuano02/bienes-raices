@@ -61,9 +61,13 @@ class PropiedadController {
         $id = verificarId('/admin');
 
         $propiedad = Propiedad::get($id);
+        $errores = Propiedad::getErrores();
+        $vendedores = Vendedor::getAll();
 
         $router->render('propiedades/actualizar', [
-            'propiedad' => $propiedad
+            'propiedad' => $propiedad,
+            'vendedores' => $vendedores,
+            'errores' => $errores
         ]);
     }
 }
