@@ -26,6 +26,7 @@ class Router {
 
         if (!$fn) {
             echo 'Página no encontrada';
+            exit;
         }
 
         call_user_func($fn, $this);
