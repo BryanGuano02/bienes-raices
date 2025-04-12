@@ -9,7 +9,7 @@
 
     <a href="../admin" class="boton boton-verde">Volver</a>
 
-    <form class="formulario" method="POST" action="/admin/vendedores/crear.php">
+    <form class="formulario" method="POST" action="/vendedores/crear">
         <?php include 'formulario.php' ?>
         <input type="submit" class="boton boton-verde" value="Registrar Vendedor">
     </form>
