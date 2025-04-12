@@ -2,14 +2,23 @@
 
 namespace Controllers;
 
+use MVC\Router;
+use Model\Vendedor;
+
 class VendedorController {
-    public static function crear(){
-        echo 'Crear';
+    public static function crear(Router $router) {
+        $errores = Vendedor::getErrores();
+        $vendedor = new Vendedor();
+
+        $router->render('vendedores/crear', [
+            'errores' => $errores,
+            'vendedor' => $vendedor
+        ]);
     }
-    public static function actualizar(){
+    public static function actualizar() {
         echo 'actualizar';
     }
-    public static function eliminar(){
+    public static function eliminar() {
         echo 'eliminar';
     }
 }
