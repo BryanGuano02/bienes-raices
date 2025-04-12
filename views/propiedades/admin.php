@@ -8,8 +8,8 @@
             <p class="alerta exito"><?php echo sanitizar($mensaje); ?></p>
         <?php } ?>
     <?php } ?>
-    <a href="/propiedad/crear" class="boton boton-verde">Nueva Propiedad</a>
-    <a href="/vendedor/crear" class="boton boton-amarillo">Nuevo Vendedor</a>
+    <a href="/propiedades/crear" class="boton boton-verde">Nueva Propiedad</a>
+    <a href="/vendedores/crear" class="boton boton-amarillo">Nuevo Vendedor</a>
     <h2>Propiedades</h2>
 
     <table class="propiedades">
@@ -35,7 +35,7 @@
                             <input type="hidden" name="tipo" value="propiedad">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
-                        <a href="/propiedad/actualizar?id=<?php echo $propiedad->id; ?>"
+                        <a href="/propiedades/actualizar?id=<?php echo $propiedad->id; ?>"
                             class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>
