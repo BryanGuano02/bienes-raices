@@ -8,14 +8,16 @@ use MVC\Router;
 class PaginasController {
     public static function renderIndex(Router $router) {
         $propiedades = Propiedad::getAnunciosLimite(3);
+        $inicio = true;
 
         $router->render('paginas/index', [
-            'propiedades' => $propiedades
+            'propiedades' => $propiedades,
+            'inicio' => $inicio
         ]);
 
     }
 
-    public static function renderNosotros() {
-        echo 'Nosotros';
+    public static function renderNosotros(Router $router) {
+        $router->render('paginas/nosotros', []);
     }
 }
