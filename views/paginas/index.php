@@ -1,25 +1,6 @@
 <main class="contenedor seccion">
     <h1>Más Sobre Nosotros</h1>
-    <div class="iconos-nosotros">
-        <div class="icono">
-            <img src="build/img/icono1.svg" alt="Icono de seguridad" loading="lazy">
-            <h3>Seguridad</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem nam culpa officiis cupiditate
-                accusamus accusantium ullam quiavoluptates saepe? Cumque?</p>
-        </div>
-        <div class="icono">
-            <img src="build/img/icono2.svg" alt="Icono de dinero" loading="lazy">
-            <h3>Precio</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem nam culpa officiis cupiditate
-                accusamus accusantium ullam quiavoluptates saepe? Cumque?</p>
-        </div>
-        <div class="icono">
-            <img src="build/img/icono3.svg" alt="Icono de reloj" loading="lazy">
-            <h3>A Tiempo</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem nam culpa officiis cupiditate
-                accusamus accusantium ullam quiavoluptates saepe? Cumque?</p>
-        </div>
-    </div>
+    <?php include 'iconos.php' ?>
 </main>
 
 <section class="seccion contenedor">
@@ -44,8 +25,8 @@
         <article class="entrada-blog">
             <div class="imagen">
                 <picture>
-                    <source srcset="img/blog1.webp" type="image/webp">
-                    <source srcset="img/blog1.jpg" type="image/jpeg">
+                    <source srcset="build/img/blog1.webp" type="image/webp">
+                    <source srcset="build/img/blog1.jpg" type="image/jpeg">
                     <img loading="lazy" src="build/img/blog1.jpg" alt="Texto de entrada de blog">
                 </picture>
             </div>
@@ -62,9 +43,9 @@
         <article class="entrada-blog">
             <div class="imagen">
                 <picture>
-                    <source srcset="img/blog2.webp" type="image/webp">
-                    <source srcset="img/blog2.jpg" type="image/jpeg">
-                    <img loading="lazy" src="img/blog2.jpg" alt="Texto de entrada de blog">
+                    <source srcset="build/img/blog2.webp" type="image/webp">
+                    <source srcset="build/img/blog2.jpg" type="image/jpeg">
+                    <img loading="lazy" src="build/img/blog2.jpg" alt="Texto de entrada de blog">
                 </picture>
             </div>
             <div class="texto-entrada">
