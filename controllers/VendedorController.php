@@ -43,8 +43,8 @@ class VendedorController {
             'vendedor' => $vendedor,
             'errores' => $errores
         ]);
-
     }
+
     public static function eliminar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
