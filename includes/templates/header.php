@@ -3,12 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-
 $auth = $_SESSION['login'] ?? false;
-
-// echo __DIR__ . "/admin/cerrar-sesion.php";
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

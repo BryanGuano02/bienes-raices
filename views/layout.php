@@ -34,10 +34,10 @@ if (!isset($inicio)) {
                 <div class="derecha">
                     <img class="dark-mode-boton" src="/build/img/dark-mode.svg" alt="Icono dark mode">
                     <nav class="navegacion">
-                        <a href="/build/nosotros.php">Nosotros</a>
-                        <a href="/build/anuncios.php">Anuncios</a>
-                        <a href="/build/blog.php">Blog</a>
-                        <a href="/build/contacto.php">Contacto</a>
+                        <a href="/nosotros">Nosotros</a>
+                        <a href="/anuncios">Anuncios</a>
+                        <a href="/blog">Blog</a>
+                        <a href="/contacto">Contacto</a>
                         <?php if ($auth): ?>
                             <a href="/admin/cerrar-sesion.php">Cerrar sesión</a>
                         <?php endif; ?>
