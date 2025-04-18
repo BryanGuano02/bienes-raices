@@ -15,7 +15,7 @@ class Router {
     }
 
     public function comprobarRutas() {
-        $urlActual = $_SERVER['REQUEST_URI'];
+        $urlActual = $_SERVER['PATH_INFO'] ?? '/';
         $metodo = $_SERVER['REQUEST_METHOD'];
 
         if ($metodo === 'GET') {
@@ -32,7 +32,7 @@ class Router {
         call_user_func($fn, $this);
     }
 
-    public function render($view, $datos =[]) {
+    public function render($view, $datos = []) {
         foreach ($datos as $key => $value) {
             $$key = $value;
         }
