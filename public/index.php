@@ -29,6 +29,6 @@ $router->get('/propiedad', [PaginasController::class, 'renderPropiedad']);
 $router->get('/blog', [PaginasController::class, 'renderBlog']);
 $router->get('/entrada', [PaginasController::class, 'renderEntrada']);
 $router->get('/contacto', [PaginasController::class, 'renderContacto']);
-$router->get('/contacto', [PaginasController::class, 'renderContacto']);
+$router->post('/contacto', [PaginasController::class, 'renderContacto']);
 
 $router->comprobarRutas();
