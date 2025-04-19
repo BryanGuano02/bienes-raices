@@ -11,6 +11,8 @@ build/*
 # Directorios de dependencias
 /node_modules
 
-/vendor/
+/vendor
 
 /imagenes
+
+.env
