@@ -1,27 +1,27 @@
 <main class="contenedor seccion">
     <h1>Contacto</h1>
     <picture>
-        <source srcset="img/destacada3.webp" type="image/webp">
-        <source srcset="img/destacada3.jpg" type="image/jpeg">
-        <img loading="lazy" src="img/destacada3.jpg" alt="Imagen Contacto">
+        <source srcset="build/img/destacada3.webp" type="image/webp">
+        <source srcset="build/img/destacada3.jpg" type="image/jpeg">
+        <img loading="lazy" src="build/img/destacada3.jpg" alt="Imagen Contacto">
     </picture>
     <h2>Llene el formulario de contacto</h2>
-    <form action="" class="formulario">
+    <form action="contacto" class="formulario" method="POST">
         <fieldset>
             <legend>Información personal</legend>
 
             <label for="nombre">Nombre</label>
-            <input type="text" placeholder="Tu Nombre" id="nombre">
+            <input type="text" placeholder="Tu Nombre" id="nombre" required>
 
             <label for="email">E-mail</label>
-            <input type="email" placeholder="Tu Email" id="email">
+            <input type="email" placeholder="Tu Email" id="email" required>
 
 
             <label for="telefono">Teléfono</label>
-            <input type="tel" placeholder="Tu Teléfono" id="telefono">
+            <input type="tel" placeholder="Tu Teléfono" id="telefono" required>
 
             <label for="mensaje">Mensaje:</label>
-            <textarea name="mensaje" id="mensaje"></textarea>
+            <textarea name="mensaje" id="mensaje" required></textarea>
         </fieldset>
 
         <fieldset>
@@ -34,7 +34,7 @@
                 <option value="Vende">Vende </option>
             </select>
             <label for="presupuesto">Precio o presupuesto</label>
-            <input type="numbre" placeholder="Tu Precio o Presupuesto" id="presupuesto">
+            <input type="numbre" placeholder="Tu Precio o Presupuesto" id="presupuesto" required>
 
         </fieldset>
         <fieldset>
